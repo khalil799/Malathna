@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ملاذنا</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #ffffff;
+      margin: 0;
+      padding: 0;
+      color: #222;
+    }
+
+    header {
+      background-color: #000;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h1 span {
+      color: red;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin: 20px 0;
+    }
+
+    nav button {
+      background-color: #000;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 6px;
+    }
+
+    nav button:hover {
+      background-color: red;
+    }
+
+    .content {
+      max-width: 800px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .important {
+      color: red;
+      font-weight: bold;
+    }
+
+    .box {
+      background-color: #f4f4f4;
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    .sheikh {
+      font-weight: bold;
+      color: green;
+    }
+
+    footer {
+      background-color: #000;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1><span>ملاذنا</span> | موقع المواعظ والقصص والكتب</h1>
+  </header>
+
+  <nav>
+    <button>الرئيسية</button>
+    <button>الأربعون النووية</button>
+    <button>قصص الصحابة</button>
+    <button>كتب دينية</button>
+    <button>عن الموقع</button>
+  </nav>
+
+  <div class="content">
+    <div class="box">
+      <h2>📘 الأربعون النووية</h2>
+      <p>في هذا القسم نعرض أحاديث الأربعين <span class="important">النووية</span> مع الشرح والتفسير.</p>
+    </div>
+
+    <div class="box">
+      <h2>📜 قصص مؤثرة</h2>
+      <p>اقرأ قصص الصحابة والتابعين والمواقف التي <span class="important">تلمس القلب</span> وتصلح النفس.</p>
+    </div>
+
+    <div class="box">
+      <h2>📚 كتب مختارة</h2>
+      <p>نقدم كتبًا دينية موثوقة يمكن تحميلها أو قراءتها مباشرة من الموقع.</p>
+    </div>
+
+    <div class="box">
+      <h2>👤 كلمة الشيخ</h2>
+      <p class="sheikh">"صلاح القلب هو بداية الطريق إلى الله، فاحرص على تطهيره بالذكر والصدق والتوبة."</p>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 - موقع ملاذنا | جميع الحقوق محفوظة
+  </footer>
+</body>
+</html>
