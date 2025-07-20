@@ -1,99 +1,274 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>ملاذنا</title>
-  <!-- استدعاء خط أنيق يدعم العربية -->
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet" />
   <style>
-    #colorMenu {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  background: #fff;
-  border: 1px solid #ccc;
-  padding: 10px;
-  border-radius: 10px;
-  display: none;
-  z-index: 1000;
-}
-
-.color-btn {
-  margin: 5px;
-  width: 30px;
-  height: 30px;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
-}
     body {
       font-family: 'Cairo', sans-serif;
       margin: 0;
-      padding: 20px;
+      padding: 20px 20px 60px 220px;
       direction: rtl;
       background-color: #fff;
       color: #222;
+      transition: background-color 0.4s ease, color 0.4s ease;
     }
-    <button onclick="toggleMenu()" style="position:fixed; top:20px; left:20px; z-index:1001;">🎨</button>
 
-<div id="colorMenu">
-  <button class="color-btn" style="background: lightgreen;" onclick="setColor('lightgreen')"></button>
-  <button class="color-btn" style="background: white;" onclick="setColor('white')"></button>
-  <button class="color-btn" style="background: black;" onclick="setColor('black')"></button>
-  <button class="color-btn" style="background: lightblue;" onclick="setColor('lightblue')"></button>
-</div>
+    /* زر إظهار/إخفاء شريط الألوان */
+    #toggleColorsBtn {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 1100;
+      padding: 8px 14px;
+      font-size: 18px;
+      cursor: pointer;
+      border: none;
+      border-radius: 8px;
+      background-color: #444;
+      color: white;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+      transition: background-color 0.3s ease;
+    }
+    #toggleColorsBtn:hover {
+      background-color: #222;
+    }
 
-    .title {
-      font-size: 28px;
+    /* شريط تغيير الألوان */
+    #colorSidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 200px;
+      height: 100%;
+      background-color: #f0f0f0;
+      box-shadow: 2px 0 8px rgba(0,0,0,0.15);
+      padding: 20px 15px;
+      box-sizing: border-box;
+      display: none;
+      z-index: 1050;
+      overflow-y: auto;
+      border-top-right-radius: 15px;
+      border-bottom-right-radius: 15px;
+    }
+
+    #colorSidebar h4 {
+      margin-top: 0;
+      margin-bottom: 15px;
       font-weight: 700;
-      text-align: center;
+      color: #333;
+      user-select: none;
+    }
+
+    .color-btn {
+      width: 100%;
+      margin: 8px 0;
+      padding: 12px 0;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 16px;
+      color: white;
+      user-select: none;
+      transition: transform 0.2s ease;
+    }
+    .color-btn:hover {
+      transform: scale(1.05);
+    }
+
+    .green { background-color: #7bc86c; }
+    .white { background-color: #ffffff; color: #333; border: 1px solid #ccc; }
+    .black { background-color: #222222; }
+    .blue { background-color: #5da8f1; }
+
+    /* المحتوى الرئيسي */
+    .main-content {
+      max-width: 900px;
+      margin: auto;
+    }
+
+    .hero {
+      background-color: #000;
+      color: white;
+      border-radius: 20px;
+      padding: 40px 20px;
       margin-bottom: 30px;
-      color: #2c3e50;
+      text-align: center;
+      position: relative;
+      user-select: none;
+    }
+
+    /* زخارف */
+    .decor {
+      position: absolute;
+      font-size: 30px;
+      opacity: 0.15;
+      z-index: 0;
+      user-select: none;
+    }
+    .top-left {
+      top: 10px;
+      left: 15px;
+    }
+    .top-right {
+      top: 10px;
+      right: 15px;
+    }
+    .bottom-left {
+      bottom: 10px;
+      left: 15px;
+    }
+    .bottom-right {
+      bottom: 10px;
+      right: 15px;
+    }
+
+    .hero h1 {
+      font-size: 32px;
+      margin: 0;
+      color: red;
+      position: relative;
+      z-index: 1;
+      user-select: text;
+    }
+    .hero p {
+      margin-top: 12px;
+      font-size: 18px;
+      position: relative;
+      z-index: 1;
+      user-select: text;
+    }
+
+    .frame {
+      border-radius: 15px;
+      border: 2px solid black;
+      background-color: #fdfdfd;
+      padding: 25px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+      position: relative;
+      transition: background-color 0.4s ease, border-color 0.4s ease;
+      user-select: text;
+    }
+
+    .frame::before {
+      content: "۞";
+      position: absolute;
+      top: -12px;
+      right: -12px;
+      font-size: 26px;
+      color: gray;
+      user-select: none;
+    }
+
+    .important {
+      color: red;
+      font-weight: 700;
     }
 
     .hadith-box {
       padding: 20px;
-      border: 1px solid #ddd;
-      background-color: #fdfdfd;
+      border: 2px dashed black;
+      border-radius: 12px;
+      background-color: #fffbe6;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
       font-size: 20px;
-      line-height: 1.8;
-      border-radius: 15px;
+      line-height: 1.7;
+      transition: background-color 0.4s ease, border-color 0.4s ease, color 0.4s ease;
+      user-select: text;
     }
+
   </style>
 </head>
 <body>
 
-  <div class="title">🌿 ملاذنا: حيث تزدهر الأرواح بالعلم والموعظة</div>
+  <button id="toggleColorsBtn" title="تبديل ألوان الموقع">🎨</button>
 
-  <div class="hadith-box" id="hadithBox">
-    🌙 <strong>الحديث الأول:</strong><br>
-    إنما الأعمال بالنيات، وإنما لكل امرئ ما نوى...
+  <div id="colorSidebar" aria-label="شريط ألوان الموقع">
+    <h4>اختر لونًا للموقع</h4>
+    <button class="color-btn green" onclick="setTheme('#a8e6a1', '#000', '#fffbe6', '#000')">أخضر فاتح</button>
+    <button class="color-btn white" onclick="setTheme('#ffffff', '#333', '#fffbe6', '#000')">أبيض</button>
+    <button class="color-btn black" onclick="setTheme('#222222', '#fff', '#444', '#fff')">أسود</button>
+    <button class="color-btn blue" onclick="setTheme('#5da8f1', '#fff', '#d0e7ff', '#003366')">أزرق فاتح</button>
   </div>
 
+  <main class="main-content" role="main" aria-label="محتوى الموقع">
+
+    <section class="hero" aria-label="قسم الترحيب">
+      <div class="decor top-left">✦</div>
+      <div class="decor top-right">۞</div>
+      <div class="decor bottom-left">❖</div>
+      <div class="decor bottom-right">✦</div>
+      <h1>مرحبًا بكم في <span class="important">ملاذنا</span></h1>
+      <p>نسأل الله أن يجعل هذا الموقع نورًا في قلوبنا، وموعظة تذكرنا بالله تعالى.</p>
+    </section>
+
+    <section class="frame" id="mainFrame" aria-label="مقدمة الموقع">
+      <p style="text-align:center;">
+        هذا الموقع يضم موعظات، قصصًا، أحاديث نبوية، ومحاضرات لتقوية الإيمان.
+      </p>
+    </section>
+
+    <section class="hadith-box" id="hadithBox" aria-live="polite" aria-atomic="true" tabindex="0">
+      🌙 <strong>الحديث الأول:</strong><br>
+      إنما الأعمال بالنيات، وإنما لكل امرئ ما نوى...
+    </section>
+
+  </main>
+
   <script>
+    // تبديل ألوان الموقع (خلفية، نص، إطار، خلفية الحديث، نص الحديث)
+    function setTheme(bgColor, textColor, hadithBg, hadithBorderColor) {
+      document.body.style.backgroundColor = bgColor;
+      document.body.style.color = textColor;
+      const mainFrame = document.getElementById('mainFrame');
+      mainFrame.style.backgroundColor = hadithBg;
+      mainFrame.style.borderColor = hadithBorderColor;
+
+      const hadithBox = document.getElementById('hadithBox');
+      hadithBox.style.backgroundColor = hadithBg;
+      hadithBox.style.borderColor = hadithBorderColor;
+      hadithBox.style.color = textColor;
+    }
+
+    // إظهار/إخفاء شريط الألوان
+    const toggleBtn = document.getElementById('toggleColorsBtn');
+    const sidebar = document.getElementById('colorSidebar');
+    toggleBtn.addEventListener('click', () => {
+      if (sidebar.style.display === 'block') {
+        sidebar.style.display = 'none';
+        document.body.style.paddingLeft = '20px';
+      } else {
+        sidebar.style.display = 'block';
+        document.body.style.paddingLeft = '220px';
+      }
+    });
+
+    // الأحاديث النبوية الأربعين (بداية)
     const ahadith = [
       "🌙 <strong>الحديث الأول:</strong><br>إنما الأعمال بالنيات، وإنما لكل امرئ ما نوى...",
       "📿 <strong>الحديث الثاني:</strong><br>من حسن إسلام المرء تركه ما لا يعنيه.",
       "🌟 <strong>الحديث الثالث:</strong><br>لا يؤمن أحدكم حتى يحب لأخيه ما يحب لنفسه.",
       "☀️ <strong>الحديث الرابع:</strong><br>إن الله لا ينظر إلى صوركم وأموالكم ولكن ينظر إلى قلوبكم وأعمالكم.",
       "📘 <strong>الحديث الخامس:</strong><br>من كان يؤمن بالله واليوم الآخر فليقل خيراً أو ليصمت.",
-      // يمكنك إضافة المزيد من الأحاديث هنا
+      "🕊 <strong>الحديث السادس:</strong><br>الدين النصيحة.",
+      "💡 <strong>الحديث السابع:</strong><br>الحلال بين والحرام بين.",
+      "🛡 <strong>الحديث الثامن:</strong><br>من كان يؤمن بالله واليوم الآخر فليقل خيراً أو ليصمت.",
+      // أضف باقي الأحاديث حسب الرغبة...
     ];
 
     let current = 0;
-    setInterval(() => {
+    function updateHadith() {
+      const hadithBox = document.getElementById('hadithBox');
+      hadithBox.innerHTML = ahadith[current];
       current = (current + 1) % ahadith.length;
-      document.getElementById("hadithBox").innerHTML = ahadith[current];
-    }, 180000); // كل ٣ دقائق
+    }
+    updateHadith();
+    setInterval(updateHadith, 180000); // تحديث كل 3 دقائق
   </script>
-  function toggleMenu() {
-  const menu = document.getElementById("colorMenu");
-  menu.style.display = menu.style.display === "block" ? "none" : "block";
-}
-
-function setColor(color) {
-  document.body.style.backgroundColor = color;
-}
 
 </body>
-</html>
+    </html>
