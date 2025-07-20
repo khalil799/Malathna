@@ -1,141 +1,99 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
   <title>ملاذنا</title>
+  <!-- استدعاء خط أنيق يدعم العربية -->
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
   <style>
+    #colorMenu {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background: #fff;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 10px;
+  display: none;
+  z-index: 1000;
+}
+
+.color-btn {
+  margin: 5px;
+  width: 30px;
+  height: 30px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
     body {
-      background-color: white;
-      font-family: 'Arial', sans-serif;
+      font-family: 'Cairo', sans-serif;
       margin: 0;
-      padding: 0;
+      padding: 20px;
       direction: rtl;
+      background-color: #fff;
+      color: #222;
     }
+    <button onclick="toggleMenu()" style="position:fixed; top:20px; left:20px; z-index:1001;">🎨</button>
 
-    .sidebar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      background: #f0f0f0;
-      width: 200px;
-      padding: 10px;
-      box-shadow: 2px 0 5px rgba(0,0,0,0.1);
-      z-index: 100;
-    }
+<div id="colorMenu">
+  <button class="color-btn" style="background: lightgreen;" onclick="setColor('lightgreen')"></button>
+  <button class="color-btn" style="background: white;" onclick="setColor('white')"></button>
+  <button class="color-btn" style="background: black;" onclick="setColor('black')"></button>
+  <button class="color-btn" style="background: lightblue;" onclick="setColor('lightblue')"></button>
+</div>
 
-    .sidebar h4 {
-      margin-top: 0;
-      font-size: 16px;
-    }
-
-    .color-button {
-      display: block;
-      margin: 5px 0;
-      padding: 6px;
-      border: none;
-      width: 100%;
-      cursor: pointer;
-      font-weight: bold;
-      border-radius: 6px;
-    }
-
-    .green { background-color: #a8e6a1; }
-    .white { background-color: #ffffff; }
-    .black { background-color: #000000; color: white; }
-    .blue { background-color: #add8e6; }
-
-    .main-content {
-      margin-right: 220px;
-      padding: 20px;
-    }
-
-    .frame {
-      border-radius: 15px;
-      border: 2px solid black;
-      background-color: #f8f8f8;
-      padding: 20px;
-      margin-bottom: 20px;
-      box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
-      position: relative;
-    }
-
-    .frame::before {
-      content: "۞";
-      position: absolute;
-      top: -10px;
-      right: -10px;
-      font-size: 24px;
-      color: gray;
-    }
-
-    .important {
-      color: red;
-      font-weight: bold;
+    .title {
+      font-size: 28px;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 30px;
+      color: #2c3e50;
     }
 
     .hadith-box {
-      margin-top: 30px;
-      padding: 15px;
-      border: 2px dashed black;
-      border-radius: 12px;
-      background-color: #fffbe6;
-      box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
-    }
-
-    .title {
-      font-size: 24px;
-      font-weight: bold;
-      text-align: center;
-      color: #333;
+      padding: 20px;
+      border: 1px solid #ddd;
+      background-color: #fdfdfd;
+      font-size: 20px;
+      line-height: 1.8;
+      border-radius: 15px;
     }
   </style>
 </head>
 <body>
 
-  <div class="sidebar">
-    <h4>🎨 تعديل الألوان:</h4>
-    <button class="color-button green" onclick="setTheme('#a8e6a1')">أخضر فاتح</button>
-    <button class="color-button white" onclick="setTheme('#ffffff')">أبيض</button>
-    <button class="color-button black" onclick="setTheme('#000000')">أسود</button>
-    <button class="color-button blue" onclick="setTheme('#add8e6')">أزرق فاتح</button>
-  </div>
+  <div class="title">🌿 ملاذنا: حيث تزدهر الأرواح بالعلم والموعظة</div>
 
-  <div class="main-content">
-    <div class="frame" id="mainFrame">
-      <div class="title">🌿 <span class="important">ملاذنا</span>: حيث تزدهر الأرواح بالعلم والموعظة</div>
-      <p style="text-align:center; margin-top: 10px;">مرحبًا بك في موقع <span class="important">ملاذنا</span> الذي يجمع بين الحكمة، والقصص، والوعظ، والذكر.</p>
-    </div>
-
-    <div class="hadith-box" id="hadithBox">
-      <b>🌙 الحديث الأول:</b><br>
-      إنما الأعمال بالنيات، وإنما لكل امرئ ما نوى...
-    </div>
+  <div class="hadith-box" id="hadithBox">
+    🌙 <strong>الحديث الأول:</strong><br>
+    إنما الأعمال بالنيات، وإنما لكل امرئ ما نوى...
   </div>
 
   <script>
     const ahadith = [
-      "🌙 الحديث الأول: إنما الأعمال بالنيات، وإنما لكل امرئ ما نوى...",
-      "📿 الحديث الثاني: من حسن إسلام المرء تركه ما لا يعنيه.",
-      "🌟 الحديث الثالث: لا يؤمن أحدكم حتى يحب لأخيه ما يحب لنفسه.",
-      "☀️ الحديث الرابع: إن الله لا ينظر إلى صوركم وأموالكم ولكن ينظر إلى قلوبكم وأعمالكم.",
-      "📘 الحديث الخامس: من كان يؤمن بالله واليوم الآخر فليقل خيراً أو ليصمت.",
-      "🕊 الحديث السادس: الدين النصيحة...",
-      "💡 الحديث السابع: الحلال بين والحرام بين...",
-      // أكمل بقية الأربعين النووية هنا
+      "🌙 <strong>الحديث الأول:</strong><br>إنما الأعمال بالنيات، وإنما لكل امرئ ما نوى...",
+      "📿 <strong>الحديث الثاني:</strong><br>من حسن إسلام المرء تركه ما لا يعنيه.",
+      "🌟 <strong>الحديث الثالث:</strong><br>لا يؤمن أحدكم حتى يحب لأخيه ما يحب لنفسه.",
+      "☀️ <strong>الحديث الرابع:</strong><br>إن الله لا ينظر إلى صوركم وأموالكم ولكن ينظر إلى قلوبكم وأعمالكم.",
+      "📘 <strong>الحديث الخامس:</strong><br>من كان يؤمن بالله واليوم الآخر فليقل خيراً أو ليصمت.",
+      // يمكنك إضافة المزيد من الأحاديث هنا
     ];
 
     let current = 0;
     setInterval(() => {
       current = (current + 1) % ahadith.length;
       document.getElementById("hadithBox").innerHTML = ahadith[current];
-    }, 180000); // 3 دقائق
-
-    function setTheme(color) {
-      document.getElementById('mainFrame').style.backgroundColor = color;
-      document.querySelector('.hadith-box').style.backgroundColor = color;
-    }
+    }, 180000); // كل ٣ دقائق
   </script>
+  function toggleMenu() {
+  const menu = document.getElementById("colorMenu");
+  menu.style.display = menu.style.display === "block" ? "none" : "block";
+}
+
+function setColor(color) {
+  document.body.style.backgroundColor = color;
+}
 
 </body>
-    </html>
+</html>
